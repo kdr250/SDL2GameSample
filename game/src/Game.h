@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 class Game
 {
@@ -20,5 +21,7 @@ private:
 	bool isRunning;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	SDL_Texture* playerTexture;
+	SDL_Rect source, destination;
 
 };
