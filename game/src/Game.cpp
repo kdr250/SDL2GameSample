@@ -26,9 +26,10 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 
 		isRunning = true;
 	}
-	else {
-		isRunning = false;
-	}
+	
+	SDL_Surface* surface = IMG_Load("asset/player.png");
+	playerTexture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
 }
 
 void Game::HandleEvnets()
@@ -54,6 +55,7 @@ void Game::Update()
 void Game::Render()
 {
 	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, playerTexture, NULL, NULL);
 	SDL_RenderPresent(renderer);
 }
 
