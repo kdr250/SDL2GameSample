@@ -1,18 +1,22 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 
+#include "Game.h"
+
 int main(int argc, char* args[]) {
-	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_Window* window = SDL_CreateWindow("SDL2 Sample", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 400, SDL_WINDOW_SHOWN);
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
+	Game* game = nullptr;
 
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+	game = new Game();
 
-	SDL_RenderClear(renderer);
+	game->Init("SDL Sample", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
 
-	SDL_RenderPresent(renderer);
+	while (game->IsRunning()) {
+		game->HandleEvnets();
+		game->Update();
+		game->Render();
+	}
 
-	SDL_Delay(3000);
+	game->Clean();
 
 	return 0;
 }
