@@ -1,3 +1,5 @@
+#include <string>
+
 #include "Game.h"
 
 Game::Game()
@@ -45,6 +47,8 @@ void Game::HandleEvnets()
 
 void Game::Update()
 {
+	counter++;
+	SDL_Log(std::to_string(counter).c_str());
 }
 
 void Game::Render()
