@@ -48,6 +48,9 @@ void Game::HandleEvnets()
 
 void Game::Update()
 {
+	destination.h = 64;
+	destination.w = 64;
+
 	counter++;
 	SDL_Log(std::to_string(counter).c_str());
 }
@@ -55,7 +58,7 @@ void Game::Update()
 void Game::Render()
 {
 	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, playerTexture, NULL, NULL);
+	SDL_RenderCopy(renderer, playerTexture, NULL, &destination);
 	SDL_RenderPresent(renderer);
 }
 
