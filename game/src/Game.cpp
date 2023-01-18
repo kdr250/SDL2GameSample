@@ -50,6 +50,7 @@ void Game::Update()
 {
 	destination.h = 64;
 	destination.w = 64;
+	destination.x = counter;
 
 	counter++;
 	SDL_Log(std::to_string(counter).c_str());
