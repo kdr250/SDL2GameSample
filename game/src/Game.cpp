@@ -48,11 +48,12 @@ void Game::HandleEvnets()
 
 void Game::Update()
 {
+	counter++;
+
 	destination.h = 64;
 	destination.w = 64;
-	destination.x = counter;
+	destination.x = counter % 800;
 
-	counter++;
 	SDL_Log(std::to_string(counter).c_str());
 }
 
