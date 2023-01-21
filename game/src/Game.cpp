@@ -1,6 +1,7 @@
 #include <string>
 
 #include "Game.h"
+#include "TextureManager.h"
 
 Game::Game()
 {
@@ -26,10 +27,8 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 
 		isRunning = true;
 	}
-	
-	SDL_Surface* surface = IMG_Load("asset/player.png");
-	playerTexture = SDL_CreateTextureFromSurface(renderer, surface);
-	SDL_FreeSurface(surface);
+
+	playerTexture = TextureManager::LoadTexture("asset/player.png", renderer);
 }
 
 void Game::HandleEvnets()
