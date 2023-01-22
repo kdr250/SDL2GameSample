@@ -14,7 +14,7 @@ int main(int argc, char* args[]) {
 
 	game = new Game();
 
-	game->Init("SDL Sample", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+	game->Init("SDL Sample", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 
 	while (game->IsRunning()) {
 		frameStart = SDL_GetTicks();
