@@ -2,6 +2,10 @@
 
 #include "Game.h"
 #include "TextureManager.h"
+#include "GameObject.h"
+
+GameObject* player;
+GameObject* enemy;
 
 Game::Game()
 {
@@ -28,7 +32,8 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		isRunning = true;
 	}
 
-	playerTexture = TextureManager::LoadTexture("asset/player.png", renderer);
+	player = new GameObject("asset/player.png", renderer, 0, 0);
+	enemy = new GameObject("asset/enemy.png", renderer, 50, 50);
 }
 
 void Game::HandleEvnets()
@@ -47,19 +52,15 @@ void Game::HandleEvnets()
 
 void Game::Update()
 {
-	counter++;
-
-	destination.h = 64;
-	destination.w = 64;
-	destination.x = counter % 800;
-
-	SDL_Log(std::to_string(counter).c_str());
+	player->Update();
+	enemy->Update();
 }
 
 void Game::Render()
 {
 	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, playerTexture, NULL, &destination);
+	player->Render();
+	enemy->Render();
 	SDL_RenderPresent(renderer);
 }
 
