@@ -16,11 +16,12 @@ public:
 
 	bool IsRunning();
 
+	static SDL_Renderer* renderer;
+
 private:
 	int counter;
 	bool isRunning;
 	SDL_Window* window;
-	SDL_Renderer* renderer;
 	SDL_Texture* playerTexture;
 	SDL_Rect source, destination;
 
