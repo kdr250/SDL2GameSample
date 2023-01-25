@@ -18,7 +18,7 @@ inline ComponentID getComponentID()
 	return lastID++;
 }
 
-template <typename T> inline ComponentID getComponentID() noexcept
+template <typename T> inline ComponentID getComponentTypeID() noexcept
 {
 	static ComponentID typeID = getComponentID();
 	return typeID();
@@ -60,4 +60,30 @@ public:
 	bool IsActive() const { return IsActive; };
 	void Destroy() { isActive = false; };
 
+	template <typename T>
+	bool HasComponent() const
+	{
+		return componentBitSet[getComponentID<T>];
+	}
+
+	template <typename T, typename... TArgs>
+	T& addComponent(TArgs&&... mArgs)
+	{
+		T* c(new T(std::forward<TArgs>(mArgs)...));
+		c->entity = this;
+		std::unique_ptr<Component> uniquePtr{ c };
+		components.emplace_back(std::move(uniquePtr));
+
+		componentArray[getComponentTypeID<T>()] = c;
+		componentBitSet[getComponentTypeID<T>()] = true;
+
+		c->Init();
+		return *c;
+	}
+
+	template<typename T> T& getComponent() const
+	{
+		auto ptr(componentArray[getComponentTypeID<T>()]);
+		return *static_cast<T*>(ptr);
+	}
 };
