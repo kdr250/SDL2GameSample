@@ -12,5 +12,7 @@
     <ClInclude Include="src\TextureManager.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Map.h" />
+    <ClInclude Include="src\EntityComponentSystem.h" />
+    <ClInclude Include="src\Components.h" />
   </ItemGroup>
 </Project>
