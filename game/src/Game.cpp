@@ -4,11 +4,16 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Map.h"
+#include "EntityComponentSystem.h"
+#include "Components.h"
 
 GameObject* player;
 GameObject* enemy;
 Map* map;
 SDL_Renderer* Game::renderer = nullptr;
+
+Manager manager;
+auto& newPlayer(manager.AddEntity());
 
 Game::Game()
 {
@@ -38,6 +43,8 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	player = new GameObject("asset/player.png", 0, 0);
 	enemy = new GameObject("asset/enemy.png", 50, 50);
 	map = new Map();
+
+	newPlayer.AddComponent<PositionComponent>();
 }
 
 void Game::HandleEvnets()
@@ -58,6 +65,10 @@ void Game::Update()
 {
 	player->Update();
 	enemy->Update();
+	manager.Update();
+
+	std::cout << newPlayer.GetComponent<PositionComponent>().x() << "," <<
+		newPlayer.GetComponent<PositionComponent>().y() << std::endl;
 }
 
 void Game::Render()
