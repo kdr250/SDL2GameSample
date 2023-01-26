@@ -1,5 +1,6 @@
 #pragma once
-#include "EntityComponentSystem.h"
+
+#include "Components.h"
 
 class PositionComponent : public Component
 {
@@ -8,14 +9,20 @@ private:
 	int yPosition;
 
 public:
-	int x() const { return xPosition; }
-	int y() const { return yPosition; }
-
-	void Init() override
+	PositionComponent()
 	{
 		xPosition = 0;
 		yPosition = 0;
 	}
+
+	PositionComponent(int x, int y)
+	{
+		xPosition = x;
+		yPosition = y;
+	}
+
+	int x() const { return xPosition; }
+	int y() const { return yPosition; }
 
 	void Update() override
 	{
@@ -29,3 +36,4 @@ public:
 		yPosition = y;
 	}
 };
+
