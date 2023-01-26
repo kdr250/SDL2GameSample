@@ -40,7 +40,7 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	map = new Map();
 
 	// ECS Implementation
-	player.AddComponent<PositionComponent>(100, 500);
+	player.AddComponent<PositionComponent>(100, 200);
 	player.AddComponent<SpriteComponent>("asset/player.png");
 }
 
@@ -62,6 +62,11 @@ void Game::Update()
 {
 	manager.Refresh();
 	manager.Update();
+
+	if (player.GetComponent<PositionComponent>().x() > 300)
+	{
+		player.GetComponent<SpriteComponent>().SetTexture("asset/enemy.png");
+	}
 }
 
 void Game::Render()
