@@ -4,16 +4,13 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Map.h"
-#include "EntityComponentSystem.h"
-#include "Components.h"
+#include "ecs/Components.h"
 
-GameObject* player;
-GameObject* enemy;
 Map* map;
 SDL_Renderer* Game::renderer = nullptr;
 
 Manager manager;
-auto& newPlayer(manager.AddEntity());
+auto& player(manager.AddEntity());
 
 Game::Game()
 {
@@ -40,11 +37,11 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		isRunning = true;
 	}
 
-	player = new GameObject("asset/player.png", 0, 0);
-	enemy = new GameObject("asset/enemy.png", 50, 50);
 	map = new Map();
 
-	newPlayer.AddComponent<PositionComponent>();
+	// ECS Implementation
+	player.AddComponent<PositionComponent>(100, 200);
+	player.AddComponent<SpriteComponent>("asset/player.png");
 }
 
 void Game::HandleEvnets()
@@ -63,20 +60,20 @@ void Game::HandleEvnets()
 
 void Game::Update()
 {
-	player->Update();
-	enemy->Update();
+	manager.Refresh();
 	manager.Update();
 
-	std::cout << newPlayer.GetComponent<PositionComponent>().x() << "," <<
-		newPlayer.GetComponent<PositionComponent>().y() << std::endl;
+	if (player.GetComponent<PositionComponent>().x() > 300)
+	{
+		player.GetComponent<SpriteComponent>().SetTexture("asset/enemy.png");
+	}
 }
 
 void Game::Render()
 {
 	SDL_RenderClear(renderer);
 	map->DrawMap();
-	player->Render();
-	enemy->Render();
+	manager.Draw();
 	SDL_RenderPresent(renderer);
 }
 
