@@ -54,9 +54,13 @@ public:
 	void Update()
 	{
 		for (auto& component : components) component->Update();
-		for (auto& component : components) component->Draw();
 	}
-	void Draw() {};
+
+	void Draw()
+	{
+		for (auto& component : components) component->Draw();
+	};
+
 	bool IsActive() const { return isActive; };
 	void Destroy() { isActive = false; };
 
