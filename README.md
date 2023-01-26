@@ -6,3 +6,4 @@ C++とSDL2の学習用レポジトリです。
 - Visual Studio 2022
 - C++ 17
 - SDL2
+- vcpkg
