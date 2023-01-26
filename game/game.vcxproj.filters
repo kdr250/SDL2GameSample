@@ -6,7 +6,6 @@
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Map.cpp" />
-    <ClCompile Include="src\EntityComponentSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
@@ -14,5 +13,6 @@
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\EntityComponentSystem.h" />
+    <ClInclude Include="src\Components.h" />
   </ItemGroup>
 </Project>

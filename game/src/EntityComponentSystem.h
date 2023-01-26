@@ -12,7 +12,7 @@ class Entity;
 
 using ComponentID = std::size_t;
 
-inline ComponentID GetComponentID()
+inline ComponentID GetComponentTypeID()
 {
 	static ComponentID lastID = 0;
 	return lastID++;
@@ -20,8 +20,8 @@ inline ComponentID GetComponentID()
 
 template <typename T> inline ComponentID GetComponentTypeID() noexcept
 {
-	static ComponentID typeID = GetComponentID();
-	return typeID();
+	static ComponentID typeID = GetComponentTypeID();
+	return typeID;
 }
 
 constexpr std::size_t maxComponents = 32;
@@ -57,13 +57,13 @@ public:
 		for (auto& component : components) component->Draw();
 	}
 	void Draw() {};
-	bool IsActive() const { return IsActive; };
+	bool IsActive() const { return isActive; };
 	void Destroy() { isActive = false; };
 
 	template <typename T>
 	bool HasComponent() const
 	{
-		return componentBitSet[GetComponentID<T>];
+		return componentBitSet[GetComponentTypeID<T>];
 	}
 
 	template <typename T, typename... TArgs>
