@@ -2,20 +2,20 @@
 
 #include "Components.h"
 
-class PositionComponent : public Component
+class TransformComponent : public Component
 {
 private:
 	int xPosition;
 	int yPosition;
 
 public:
-	PositionComponent()
+	TransformComponent()
 	{
 		xPosition = 0;
 		yPosition = 0;
 	}
 
-	PositionComponent(int x, int y)
+	TransformComponent(int x, int y)
 	{
 		xPosition = x;
 		yPosition = y;
