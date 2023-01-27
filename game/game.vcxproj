@@ -152,16 +152,18 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
+    <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ecs\Components.h" />
     <ClInclude Include="src\ecs\EntityComponentSystem.h" />
-    <ClInclude Include="src\ecs\PositionComponent.h" />
+    <ClInclude Include="src\ecs\TransformComponent.h" />
     <ClInclude Include="src\ecs\SpriteComponent.h" />
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\TextureManager.h" />
+    <ClInclude Include="src\Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
