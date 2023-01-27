@@ -6,6 +6,7 @@
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
@@ -14,7 +15,8 @@
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\ecs\EntityComponentSystem.h" />
     <ClInclude Include="src\ecs\Components.h" />
-    <ClInclude Include="src\ecs\PositionComponent.h" />
+    <ClInclude Include="src\ecs\TransformComponent.h" />
     <ClInclude Include="src\ecs\SpriteComponent.h" />
+    <ClInclude Include="src\Vector2D.h" />
   </ItemGroup>
 </Project>

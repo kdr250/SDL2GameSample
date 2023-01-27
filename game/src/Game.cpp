@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Map.h"
+#include "Vector2D.h"
 #include "ecs/Components.h"
 
 Map* map;
@@ -40,7 +41,7 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	map = new Map();
 
 	// ECS Implementation
-	player.AddComponent<TransformComponent>(100, 200);
+	player.AddComponent<TransformComponent>(100, 100);
 	player.AddComponent<SpriteComponent>("asset/player.png");
 }
 
@@ -62,8 +63,9 @@ void Game::Update()
 {
 	manager.Refresh();
 	manager.Update();
+	player.GetComponent<TransformComponent>().position.Add(Vector2D(5.0f, 5.0f));
 
-	if (player.GetComponent<TransformComponent>().x() > 300)
+	if (player.GetComponent<TransformComponent>().position.x > 300)
 	{
 		player.GetComponent<SpriteComponent>().SetTexture("asset/enemy.png");
 	}
