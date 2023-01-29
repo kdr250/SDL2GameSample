@@ -9,6 +9,7 @@
 
 Map* map;
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
 
 Manager manager;
 auto& player(manager.AddEntity());
@@ -43,11 +44,11 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	// ECS Implementation
 	player.AddComponent<TransformComponent>(100, 100);
 	player.AddComponent<SpriteComponent>("asset/player.png");
+    player.AddComponent<KeyboardController>();
 }
 
 void Game::HandleEvnets()
 {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 
 	switch (event.type) {
@@ -63,12 +64,6 @@ void Game::Update()
 {
 	manager.Refresh();
 	manager.Update();
-	player.GetComponent<TransformComponent>().position.Add(Vector2D(5.0f, 5.0f));
-
-	if (player.GetComponent<TransformComponent>().position.x > 300)
-	{
-		player.GetComponent<SpriteComponent>().SetTexture("asset/enemy.png");
-	}
 }
 
 void Game::Render()

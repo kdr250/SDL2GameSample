@@ -32,6 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B50EC02B2986476700E3CC87 /* KeyboardController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardController.h; sourceTree = "<group>"; };
 		B5262A5F2986145A008B0E6E /* SDL2GameSample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL2GameSample; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5262A6C29861580008B0E6E /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
 		B5262A6D29861580008B0E6E /* dirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dirt.png; sourceTree = "<group>"; };
@@ -145,6 +146,7 @@
 				B5262A7929861580008B0E6E /* Components.h */,
 				B5262A7A29861580008B0E6E /* EntityComponentSystem.h */,
 				B5262A7B29861580008B0E6E /* TransformComponent.h */,
+				B50EC02B2986476700E3CC87 /* KeyboardController.h */,
 			);
 			path = ecs;
 			sourceTree = "<group>";
