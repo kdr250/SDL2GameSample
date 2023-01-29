@@ -21,6 +21,7 @@ public:
 	bool IsRunning();
 
 	static SDL_Renderer* renderer;
+    static SDL_Event event;
 
 private:
 	int counter;
