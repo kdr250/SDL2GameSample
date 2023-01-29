@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
-#ifdef _WINDOWS
+#if defined _WIN32 || defined _WIN64
     #include <SDL2/SDL_image.h>
 #else
     #include <SDL2_image/SDL_image.h>
