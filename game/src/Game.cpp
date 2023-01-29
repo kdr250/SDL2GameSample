@@ -6,13 +6,16 @@
 #include "Map.h"
 #include "Vector2D.h"
 #include "ecs/Components.h"
+#include "Collision.h"
 
 Map* map;
+Manager manager;
+
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
-Manager manager;
 auto& player(manager.AddEntity());
+auto& wall(manager.AddEntity());
 
 Game::Game()
 {
@@ -42,9 +45,14 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	map = new Map();
 
 	// ECS Implementation
-	player.AddComponent<TransformComponent>(100, 100);
+	player.AddComponent<TransformComponent>(2);
 	player.AddComponent<SpriteComponent>("asset/player.png");
     player.AddComponent<KeyboardController>();
+	player.AddComponent<ColliderComponent>("player");
+
+	wall.AddComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
+	wall.AddComponent<SpriteComponent>("asset/dirt.png");
+	wall.AddComponent<ColliderComponent>("wall");
 }
 
 void Game::HandleEvnets()
@@ -64,6 +72,11 @@ void Game::Update()
 {
 	manager.Refresh();
 	manager.Update();
+
+	if (Collision::AABB(player.GetComponent<ColliderComponent>().collider, wall.GetComponent<ColliderComponent>().collider)) {
+		player.GetComponent<TransformComponent>().scale = 1;
+		SDL_Log("Wall Hit!!!");
+	}
 }
 
 void Game::Render()
