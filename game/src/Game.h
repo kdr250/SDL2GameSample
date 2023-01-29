@@ -1,6 +1,10 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#ifdef _WINDOWS
+    #include <SDL2/SDL_image.h>
+#else
+    #include <SDL2_image/SDL_image.h>
+#endif
 
 class Game
 {
