@@ -7,6 +7,7 @@
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\Vector2D.cpp" />
+    <ClCompile Include="src\Collision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
@@ -18,5 +19,8 @@
     <ClInclude Include="src\ecs\TransformComponent.h" />
     <ClInclude Include="src\ecs\SpriteComponent.h" />
     <ClInclude Include="src\Vector2D.h" />
+    <ClInclude Include="src\ecs\KeyboardController.h" />
+    <ClInclude Include="src\ecs\ColliderComponent.h" />
+    <ClInclude Include="src\Collision.h" />
   </ItemGroup>
 </Project>
