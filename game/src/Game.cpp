@@ -75,6 +75,7 @@ void Game::Update()
 
 	if (Collision::AABB(player.GetComponent<ColliderComponent>().collider, wall.GetComponent<ColliderComponent>().collider)) {
 		player.GetComponent<TransformComponent>().scale = 1;
+		player.GetComponent<TransformComponent>().velocity * -1;
 		SDL_Log("Wall Hit!!!");
 	}
 }
