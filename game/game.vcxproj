@@ -161,6 +161,7 @@
     <ClInclude Include="src\ecs\Components.h" />
     <ClInclude Include="src\ecs\EntityComponentSystem.h" />
     <ClInclude Include="src\ecs\KeyboardController.h" />
+    <ClInclude Include="src\ecs\TileComponent.h" />
     <ClInclude Include="src\ecs\TransformComponent.h" />
     <ClInclude Include="src\ecs\SpriteComponent.h" />
     <ClInclude Include="src\Map.h" />

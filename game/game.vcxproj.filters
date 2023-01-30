@@ -22,5 +22,6 @@
     <ClInclude Include="src\ecs\KeyboardController.h" />
     <ClInclude Include="src\ecs\ColliderComponent.h" />
     <ClInclude Include="src\Collision.h" />
+    <ClInclude Include="src\ecs\TileComponent.h" />
   </ItemGroup>
 </Project>
