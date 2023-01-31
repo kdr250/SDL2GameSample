@@ -24,4 +24,7 @@
     <ClInclude Include="src\Collision.h" />
     <ClInclude Include="src\ecs\TileComponent.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="asset\p16x16.map" />
+  </ItemGroup>
 </Project>

@@ -19,10 +19,6 @@ std::vector<ColliderComponent*> Game::colliders;
 auto& player(manager.AddEntity());
 auto& wall(manager.AddEntity());
 
-auto& tile0(manager.AddEntity());
-auto& tile1(manager.AddEntity());
-auto& tile2(manager.AddEntity());
-
 Game::Game()
 {
 }
@@ -49,14 +45,9 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	}
 
 	map = new Map();
+	Map::LoadMap("asset/p16x16.map", 16, 16);
 
 	// ECS Implementation
-	tile0.AddComponent<TileComponent>(200, 200, 32, 32, 0);
-	tile1.AddComponent<TileComponent>(250, 250, 32, 32, 1);
-	tile1.AddComponent<ColliderComponent>("dirt");
-	tile2.AddComponent<TileComponent>(150, 150, 32, 32, 2);
-	tile2.AddComponent<ColliderComponent>("grass");
-
 	player.AddComponent<TransformComponent>(2);
 	player.AddComponent<SpriteComponent>("asset/player.png");
 	player.AddComponent<KeyboardController>();
@@ -109,4 +100,10 @@ void Game::Clean()
 bool Game::IsRunning()
 {
 	return isRunning;
+}
+
+void Game::AddTile(int id, int x, int y)
+{
+	auto& tile(manager.AddEntity());
+	tile.AddComponent<TileComponent>(x, y, 32, 32, id);
 }
