@@ -8,6 +8,7 @@
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\Vector2D.cpp" />
     <ClCompile Include="src\Collision.cpp" />
+    <ClCompile Include="src\ecs\EntityComponentSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
