@@ -19,6 +19,14 @@ std::vector<ColliderComponent*> Game::colliders;
 auto& player(manager.AddEntity());
 auto& wall(manager.AddEntity());
 
+enum GroupLabel : std::size_t
+{
+	GroupMap,
+	GroupPlayer,
+	GroupEnemies,
+	GroupCollider
+};
+
 Game::Game()
 {
 }
@@ -52,10 +60,12 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	player.AddComponent<SpriteComponent>("asset/player.png");
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
+	player.AddGroup(GroupPlayer);
 
 	wall.AddComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
 	wall.AddComponent<SpriteComponent>("asset/dirt.png");
 	wall.AddComponent<ColliderComponent>("wall");
+	wall.AddGroup(GroupMap);
 }
 
 void Game::HandleEvnets()
@@ -81,11 +91,22 @@ void Game::Update()
 	}
 }
 
+auto& tiles(manager.GetGroup(GroupMap));
+auto& players(manager.GetGroup(GroupPlayer));
+auto& enemies(manager.GetGroup(GroupEnemies));
+
 void Game::Render()
 {
 	SDL_RenderClear(renderer);
-	// map->DrawMap();
-	manager.Draw();
+	for (auto& tile : tiles) {
+		tile->Draw();
+	}
+	for (auto& player : players) {
+		player->Draw();
+	}
+	for (auto& enemy : enemies) {
+		enemy->Draw();
+	}
 	SDL_RenderPresent(renderer);
 }
 
@@ -106,4 +127,5 @@ void Game::AddTile(int id, int x, int y)
 {
 	auto& tile(manager.AddEntity());
 	tile.AddComponent<TileComponent>(x, y, 32, 32, id);
+	tile.AddGroup(GroupMap);
 }
