@@ -57,7 +57,7 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 
 	// ECS Implementation
 	player.AddComponent<TransformComponent>(2);
-	player.AddComponent<SpriteComponent>("asset/player.png");
+	player.AddComponent<SpriteComponent>("asset/player_idle.png", 4, 200);
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
 	player.AddGroup(GroupPlayer);
