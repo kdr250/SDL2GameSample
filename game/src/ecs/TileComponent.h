@@ -14,7 +14,7 @@ public:
 
 	TileComponent() = default;
 
-	TileComponent(int sourceX, int sourceY, int xpos, int ypos, const char* path)
+	TileComponent(int sourceX, int sourceY, int xpos, int ypos, int tileSize, int tileScale, const char* path)
 	{
 		texture = TextureManager::LoadTexture(path);
 
@@ -23,11 +23,11 @@ public:
 
 		sourceRect.x = sourceX;
 		sourceRect.y = sourceY;
-		sourceRect.w = sourceRect.h = 32;
+		sourceRect.w = sourceRect.h = tileSize;
 
 		destinationRect.x = xpos;
 		destinationRect.y = ypos;
-		destinationRect.w = destinationRect.h = 64;
+		destinationRect.w = destinationRect.h = tileSize * tileScale;
 	}
 
 	~TileComponent()

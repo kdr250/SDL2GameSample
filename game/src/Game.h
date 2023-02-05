@@ -24,12 +24,16 @@ public:
 
 	bool IsRunning();
 
-	static void AddTile(int sourceX, int sourceY, int xpos, int ypos);
 	static SDL_Renderer* renderer;
     static SDL_Event event;
-	static std::vector<ColliderComponent*> colliders;
 	static bool isRunning;
 	static SDL_Rect camera;
+	enum GroupLabel : std::size_t
+	{
+		GroupMap,
+		GroupPlayer,
+		GroupCollider
+	};
 
 private:
 	int counter;
