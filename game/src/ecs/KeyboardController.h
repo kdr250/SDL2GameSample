@@ -22,7 +22,6 @@ public:
             switch (Game::event.key.keysym.sym) {
                 case SDLK_w:
                     transform->velocity.y = -1;
-                    sprite->Play("Walk");
                     break;
                 case SDLK_a:
                     transform->velocity.x = -1;
@@ -35,7 +34,6 @@ public:
                     break;
                 case SDLK_s:
                     transform->velocity.y = 1;
-                    sprite->Play("Walk");
                     break;
                 default:
                     break;
@@ -46,7 +44,6 @@ public:
             switch (Game::event.key.keysym.sym) {
                 case SDLK_w:
                     transform->velocity.y = 0;
-                    sprite->Play("Idle");
                     break;
                 case SDLK_a:
                     transform->velocity.x = 0;
@@ -59,7 +56,6 @@ public:
                     break;
                 case SDLK_s:
                     transform->velocity.y = 0;
-                    sprite->Play("Idle");
                     break;
                 default:
                     break;
