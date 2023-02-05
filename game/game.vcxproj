@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\AssetManager.cpp" />
     <ClCompile Include="src\Collision.cpp" />
     <ClCompile Include="src\ecs\EntityComponentSystem.cpp" />
     <ClCompile Include="src\Map.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AssetManager.h" />
     <ClInclude Include="src\Collision.h" />
     <ClInclude Include="src\ecs\Animation.h" />
     <ClInclude Include="src\ecs\ColliderComponent.h" />
