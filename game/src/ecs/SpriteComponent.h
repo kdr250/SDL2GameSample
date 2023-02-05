@@ -47,7 +47,6 @@ public:
 
 	~SpriteComponent()
 	{
-		SDL_DestroyTexture(texture);
 	}
 
 	void SetTexture(const char* path)

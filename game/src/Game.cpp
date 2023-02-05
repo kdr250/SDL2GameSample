@@ -16,6 +16,8 @@ SDL_Event Game::event;
 
 std::vector<ColliderComponent*> Game::colliders;
 
+bool Game::isRunning = false;
+
 auto& player(manager.AddEntity());
 
 const char* mapFile = "asset/terrain_ss.png";
@@ -77,19 +79,23 @@ void Game::HandleEvnets()
 	}
 }
 
+auto& tiles(manager.GetGroup(GroupMap));
+auto& players(manager.GetGroup(GroupPlayer));
+auto& enemies(manager.GetGroup(GroupEnemies));
+
 void Game::Update()
 {
 	manager.Refresh();
 	manager.Update();
 
-	for (auto collider : colliders) {
-		Collision::AABB(player.GetComponent<ColliderComponent>(), *collider);
+	Vector2D playerVelocity = player.GetComponent<TransformComponent>().velocity;
+	int playerSpeed = player.GetComponent<TransformComponent>().speed;
+
+	for (auto tile : tiles) {
+		tile->GetComponent<TileComponent>().destinationRect.x += -(playerVelocity.x * playerSpeed);
+		tile->GetComponent<TileComponent>().destinationRect.y += -(playerVelocity.y * playerSpeed);
 	}
 }
-
-auto& tiles(manager.GetGroup(GroupMap));
-auto& players(manager.GetGroup(GroupPlayer));
-auto& enemies(manager.GetGroup(GroupEnemies));
 
 void Game::Render()
 {
