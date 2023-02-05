@@ -17,7 +17,8 @@ SDL_Event Game::event;
 std::vector<ColliderComponent*> Game::colliders;
 
 auto& player(manager.AddEntity());
-auto& wall(manager.AddEntity());
+
+const char* mapFile = "asset/terrain_ss.png";
 
 enum GroupLabel : std::size_t
 {
@@ -53,7 +54,7 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	}
 
 	map = new Map();
-	Map::LoadMap("asset/p16x16.map", 16, 16);
+	Map::LoadMap("asset/map.map", 25, 20);
 
 	// ECS Implementation
 	player.AddComponent<TransformComponent>(4);
@@ -61,11 +62,6 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
 	player.AddGroup(GroupPlayer);
-
-	wall.AddComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
-	wall.AddComponent<SpriteComponent>("asset/dirt.png");
-	wall.AddComponent<ColliderComponent>("wall");
-	wall.AddGroup(GroupMap);
 }
 
 void Game::HandleEvnets()
@@ -123,9 +119,9 @@ bool Game::IsRunning()
 	return isRunning;
 }
 
-void Game::AddTile(int id, int x, int y)
+void Game::AddTile(int sourceX, int sourceY, int xpos, int ypos)
 {
 	auto& tile(manager.AddEntity());
-	tile.AddComponent<TileComponent>(x, y, 32, 32, id);
+	tile.AddComponent<TileComponent>(sourceX, sourceY, xpos, ypos, mapFile);
 	tile.AddGroup(GroupMap);
 }

@@ -18,8 +18,6 @@ bool Collision::AABB(const SDL_Rect& rectA, const SDL_Rect& rectB)
 bool Collision::AABB(const ColliderComponent& colliderA, const ColliderComponent& colliderB)
 {
 	if (AABB(colliderA.collider, colliderB.collider)) {
-		std::string message = colliderA.tag + " hit: " + colliderB.tag;
-		SDL_Log(message.c_str());
 		return true;
 	}
 
