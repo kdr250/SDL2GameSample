@@ -46,7 +46,7 @@ public:
 		transform = &entity->GetComponent<TransformComponent>();
 
 		sourceRect.x = sourceRect.y = 0;
-		sourceRect.w = transform->width;
+		sourceRect.w = transform->width / 2;
 		sourceRect.h = transform->height;
 	};
 
