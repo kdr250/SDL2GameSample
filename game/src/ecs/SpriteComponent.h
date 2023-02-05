@@ -71,8 +71,8 @@ public:
 
 		sourceRect.y = animationIndex * transform->height;
 
-		destinationRect.x = static_cast<int>(transform->position.x);
-		destinationRect.y = static_cast<int>(transform->position.y);
+		destinationRect.x = static_cast<int>(transform->position.x) - Game::camera.x;
+		destinationRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
 		destinationRect.w = transform->width * transform->scale;
 		destinationRect.h = transform->height * transform->scale;
 	};
