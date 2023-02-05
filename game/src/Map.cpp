@@ -1,9 +1,10 @@
 #include <string>
 #include <fstream>
+
 #include "Map.h"
 #include "TextureManager.h"
 #include "ecs/EntityComponentSystem.h"
-#include "ecs/TileComponent.h"
+#include "ecs/Components.h"
 
 extern Manager manager;
 
