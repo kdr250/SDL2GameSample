@@ -51,7 +51,7 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	map->LoadMap("asset/map.map", 25, 20);
 
 	// ECS Implementation
-	player.AddComponent<TransformComponent>(4);
+	player.AddComponent<TransformComponent>(800.0f, 640.0f, 16, 16, 4);
 	player.AddComponent<SpriteComponent>("asset/player_anims.png", true);
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
