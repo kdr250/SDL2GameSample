@@ -1,9 +1,11 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <map>
 
 #include "Components.h"
 #include "../TextureManager.h"
+#include "Animation.h"
 
 class SpriteComponent : public Component
 {
@@ -17,17 +19,29 @@ private:
 	int speed = 100;
 
 public:
+	int animationIndex = 0;
+	std::map < const char*, Animation> animations;
+
+	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
+
 	SpriteComponent() = default;
 	SpriteComponent(const char* path)
 	{
 		SetTexture(path);
 	};
 
-	SpriteComponent(const char* path, int mFrame, int mSpeed)
+	SpriteComponent(const char* path, bool animated)
 	{
-		isAnimated = true;
-		frame = mFrame;
-		speed = mSpeed;
+		isAnimated = animated;
+
+		Animation idle = Animation(0, 2, 100);
+		Animation walk = Animation(1, 8, 100);
+
+		animations.emplace("Idle", idle);
+		animations.emplace("Walk", walk);
+
+		Play("Idle");
+
 		SetTexture(path);
 	};
 
@@ -46,7 +60,7 @@ public:
 		transform = &entity->GetComponent<TransformComponent>();
 
 		sourceRect.x = sourceRect.y = 0;
-		sourceRect.w = transform->width / 2;
+		sourceRect.w = transform->width;
 		sourceRect.h = transform->height;
 	};
 
@@ -55,6 +69,9 @@ public:
 		if (isAnimated) {
 			sourceRect.x = sourceRect.w * static_cast<int>((SDL_GetTicks() / speed) % frame);
 		}
+
+		sourceRect.y = animationIndex * transform->height;
+
 		destinationRect.x = static_cast<int>(transform->position.x);
 		destinationRect.y = static_cast<int>(transform->position.y);
 		destinationRect.w = transform->width * transform->scale;
@@ -63,6 +80,13 @@ public:
 
 	void Draw() override
 	{
-		TextureManager::Draw(texture, sourceRect, destinationRect);
+		TextureManager::Draw(texture, sourceRect, destinationRect, spriteFlip);
 	};
+
+	void Play(const char* animationName)
+	{
+		frame = animations[animationName].frame;
+		animationIndex = animations[animationName].index;
+		speed = animations[animationName].speed;
+	}
 };

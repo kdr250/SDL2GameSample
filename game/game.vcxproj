@@ -158,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Collision.h" />
+    <ClInclude Include="src\ecs\Animation.h" />
     <ClInclude Include="src\ecs\ColliderComponent.h" />
     <ClInclude Include="src\ecs\Components.h" />
     <ClInclude Include="src\ecs\EntityComponentSystem.h" />
