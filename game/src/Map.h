@@ -3,12 +3,16 @@
 class Map
 {
 public:
-	Map();
+	Map(const char* mfp, int ms, int ts);
 	~Map();
 
-	static void LoadMap(std::string path, int sizeX, int sizeY);
+	void LoadMap(std::string path, int sizeX, int sizeY);
+	void AddTile(int sourceX, int sourceY, int xpos, int ypos);
 
 private:
-
+	const char* mapFilePath;
+	int mapScale;
+	int tileSize;
+	int scaledSize;
 };
 

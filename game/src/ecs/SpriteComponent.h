@@ -20,7 +20,7 @@ private:
 
 public:
 	int animationIndex = 0;
-	std::map < const char*, Animation> animations;
+	std::map <const char*, Animation> animations;
 
 	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 
@@ -45,9 +45,7 @@ public:
 		SetTexture(path);
 	};
 
-	~SpriteComponent()
-	{
-	}
+	~SpriteComponent() {};
 
 	void SetTexture(const char* path)
 	{
