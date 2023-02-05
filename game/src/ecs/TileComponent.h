@@ -10,12 +10,16 @@ class TileComponent : public Component
 public:
 	SDL_Texture* texture;
 	SDL_Rect sourceRect, destinationRect;
+	Vector2D position;
 
 	TileComponent() = default;
 
 	TileComponent(int sourceX, int sourceY, int xpos, int ypos, const char* path)
 	{
 		texture = TextureManager::LoadTexture(path);
+
+		position.x = xpos;
+		position.y = ypos;
 
 		sourceRect.x = sourceX;
 		sourceRect.y = sourceY;
@@ -28,7 +32,12 @@ public:
 
 	~TileComponent()
 	{
-		SDL_DestroyTexture(texture);
+	}
+
+	void Update() override
+	{
+		destinationRect.x = position.x - Game::camera.x;
+		destinationRect.y = position.y - Game::camera.y;
 	}
 
 	void Draw() override
