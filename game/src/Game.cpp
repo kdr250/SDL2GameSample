@@ -18,6 +18,8 @@ SDL_Rect Game::camera = { 0, 0, 800, 640 };
 
 bool Game::isRunning = false;
 
+AssetManager* Game::assetManager = new AssetManager(&manager);
+
 auto& player(manager.AddEntity());
 
 const char* mapFile = "asset/terrain_ss.png";
@@ -47,12 +49,15 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		isRunning = true;
 	}
 
-	map = new Map("asset/terrain_ss.png", 3, 32);
+	assetManager->AddTexture("terrain", "asset/terrain_ss.png");
+	assetManager->AddTexture("player", "asset/player_anims.png");
+
+	map = new Map("terrain", 3, 32);
 	map->LoadMap("asset/map.map", 25, 20);
 
 	// ECS Implementation
 	player.AddComponent<TransformComponent>(800.0f, 640.0f, 16, 16, 4);
-	player.AddComponent<SpriteComponent>("asset/player_anims.png", true);
+	player.AddComponent<SpriteComponent>("player", true);
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
 	player.AddGroup(GroupPlayer);

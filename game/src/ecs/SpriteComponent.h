@@ -30,7 +30,7 @@ public:
 		SetTexture(path);
 	};
 
-	SpriteComponent(const char* path, bool animated)
+	SpriteComponent(std::string id, bool animated)
 	{
 		isAnimated = animated;
 
@@ -42,14 +42,14 @@ public:
 
 		Play("Idle");
 
-		SetTexture(path);
+		SetTexture(id);
 	};
 
 	~SpriteComponent() {};
 
-	void SetTexture(const char* path)
+	void SetTexture(std::string id)
 	{
-		texture = TextureManager::LoadTexture(path);
+		texture = Game::assetManager->GetTexture(id);
 	}
 
 	void Init() override
