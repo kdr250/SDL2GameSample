@@ -7,6 +7,7 @@
 #include "Vector2D.h"
 #include "ecs/Components.h"
 #include "Collision.h"
+#include "AssetManager.h"
 
 Map* map;
 Manager manager;
@@ -51,6 +52,7 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 
 	assetManager->AddTexture("terrain", "asset/terrain_ss.png");
 	assetManager->AddTexture("player", "asset/player_anims.png");
+	assetManager->AddTexture("projectile", "asset/projectile.png");
 
 	map = new Map("terrain", 3, 32);
 	map->LoadMap("asset/map.map", 25, 20);
@@ -61,11 +63,14 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
 	player.AddGroup(GroupPlayer);
+
+	assetManager->CreateProjectile(Vector2D(600, 600), 200, 2, "projectile");
 }
 
 auto& tiles(manager.GetGroup(Game::GroupMap));
 auto& players(manager.GetGroup(Game::GroupPlayer));
 auto& colliders(manager.GetGroup(Game::GroupCollider));
+auto& projectiles(manager.GetGroup(Game::GroupProjectile));
 
 void Game::HandleEvnets()
 {
@@ -95,6 +100,12 @@ void Game::Update()
 		}
 	}
 
+	for (auto& projectile : projectiles) {
+		if (Collision::AABB(player.GetComponent<ColliderComponent>().collider, projectile->GetComponent<ColliderComponent>().collider)) {
+			projectile->Destroy();
+		}
+	}
+
 	camera.x = player.GetComponent<TransformComponent>().position.x - 400;
 	camera.y = player.GetComponent<TransformComponent>().position.y - 320;
 
@@ -115,6 +126,9 @@ void Game::Render()
 	}
 	for (auto& player : players) {
 		player->Draw();
+	}
+	for (auto& projectile : projectiles) {
+		projectile->Draw();
 	}
 	SDL_RenderPresent(renderer);
 }

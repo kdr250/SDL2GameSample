@@ -8,8 +8,7 @@
     #include <SDL2_image/SDL_image.h>
 #endif
 
-#include "AssetManager.h"
-
+class AssetManager;
 class ColliderComponent;
 
 class Game
@@ -35,7 +34,8 @@ public:
 	{
 		GroupMap,
 		GroupPlayer,
-		GroupCollider
+		GroupCollider,
+		GroupProjectile
 	};
 
 private:

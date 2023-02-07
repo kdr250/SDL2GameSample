@@ -6,6 +6,7 @@
 #include "Components.h"
 #include "../TextureManager.h"
 #include "Animation.h"
+#include "../AssetManager.h"
 
 class SpriteComponent : public Component
 {
