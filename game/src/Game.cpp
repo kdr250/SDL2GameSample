@@ -7,6 +7,7 @@
 #include "Vector2D.h"
 #include "ecs/Components.h"
 #include "Collision.h"
+#include "AssetManager.h"
 
 Map* map;
 Manager manager;
@@ -17,6 +18,8 @@ SDL_Event Game::event;
 SDL_Rect Game::camera = { 0, 0, 800, 640 };
 
 bool Game::isRunning = false;
+
+AssetManager* Game::assetManager = new AssetManager(&manager);
 
 auto& player(manager.AddEntity());
 
@@ -47,20 +50,30 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		isRunning = true;
 	}
 
-	map = new Map("asset/terrain_ss.png", 3, 32);
+	assetManager->AddTexture("terrain", "asset/terrain_ss.png");
+	assetManager->AddTexture("player", "asset/player_anims.png");
+	assetManager->AddTexture("projectile", "asset/projectile.png");
+
+	map = new Map("terrain", 3, 32);
 	map->LoadMap("asset/map.map", 25, 20);
 
 	// ECS Implementation
 	player.AddComponent<TransformComponent>(800.0f, 640.0f, 16, 16, 4);
-	player.AddComponent<SpriteComponent>("asset/player_anims.png", true);
+	player.AddComponent<SpriteComponent>("player", true);
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
 	player.AddGroup(GroupPlayer);
+
+	assetManager->CreateProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile");
+	assetManager->CreateProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile");
+	assetManager->CreateProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile");
+	assetManager->CreateProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile");
 }
 
 auto& tiles(manager.GetGroup(Game::GroupMap));
 auto& players(manager.GetGroup(Game::GroupPlayer));
 auto& colliders(manager.GetGroup(Game::GroupCollider));
+auto& projectiles(manager.GetGroup(Game::GroupProjectile));
 
 void Game::HandleEvnets()
 {
@@ -90,6 +103,13 @@ void Game::Update()
 		}
 	}
 
+	for (auto& projectile : projectiles) {
+		if (Collision::AABB(player.GetComponent<ColliderComponent>().collider, projectile->GetComponent<ColliderComponent>().collider)) {
+			SDL_Log("Hit Player!");
+			projectile->Destroy();
+		}
+	}
+
 	camera.x = player.GetComponent<TransformComponent>().position.x - 400;
 	camera.y = player.GetComponent<TransformComponent>().position.y - 320;
 
@@ -110,6 +130,9 @@ void Game::Render()
 	}
 	for (auto& player : players) {
 		player->Draw();
+	}
+	for (auto& projectile : projectiles) {
+		projectile->Draw();
 	}
 	SDL_RenderPresent(renderer);
 }

@@ -14,9 +14,9 @@ public:
 
 	TileComponent() = default;
 
-	TileComponent(int sourceX, int sourceY, int xpos, int ypos, int tileSize, int tileScale, const char* path)
+	TileComponent(int sourceX, int sourceY, int xpos, int ypos, int tileSize, int tileScale, std::string id)
 	{
-		texture = TextureManager::LoadTexture(path);
+		texture = Game::assetManager->GetTexture(id);
 
 		position.x = xpos;
 		position.y = ypos;

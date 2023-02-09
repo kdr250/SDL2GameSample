@@ -9,6 +9,7 @@
     <ClCompile Include="src\Vector2D.cpp" />
     <ClCompile Include="src\Collision.cpp" />
     <ClCompile Include="src\ecs\EntityComponentSystem.cpp" />
+    <ClCompile Include="src\AssetManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
@@ -25,8 +26,7 @@
     <ClInclude Include="src\Collision.h" />
     <ClInclude Include="src\ecs\TileComponent.h" />
     <ClInclude Include="src\ecs\Animation.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="asset\p16x16.map" />
+    <ClInclude Include="src\AssetManager.h" />
+    <ClInclude Include="src\ecs\ProjectileComponent.h" />
   </ItemGroup>
 </Project>

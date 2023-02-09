@@ -6,6 +6,7 @@
 #include "Components.h"
 #include "../TextureManager.h"
 #include "Animation.h"
+#include "../AssetManager.h"
 
 class SpriteComponent : public Component
 {
@@ -25,12 +26,12 @@ public:
 	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 
 	SpriteComponent() = default;
-	SpriteComponent(const char* path)
+	SpriteComponent(std::string id)
 	{
-		SetTexture(path);
+		SetTexture(id);
 	};
 
-	SpriteComponent(const char* path, bool animated)
+	SpriteComponent(std::string id, bool animated)
 	{
 		isAnimated = animated;
 
@@ -42,14 +43,14 @@ public:
 
 		Play("Idle");
 
-		SetTexture(path);
+		SetTexture(id);
 	};
 
 	~SpriteComponent() {};
 
-	void SetTexture(const char* path)
+	void SetTexture(std::string id)
 	{
-		texture = TextureManager::LoadTexture(path);
+		texture = Game::assetManager->GetTexture(id);
 	}
 
 	void Init() override
