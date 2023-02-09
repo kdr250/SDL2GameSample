@@ -2,20 +2,19 @@
 
 #include "EntityComponentSystem.h"
 #include "Components.h"
+#include "../Vector2D.h"
 
 class ProjectileComponent : public Component
 {
 public:
-	ProjectileComponent(int rang, int sp) : range(rang), speed(sp)
-	{
-
-	};
+	ProjectileComponent(int rang, int sp, Vector2D vel) : range(rang), speed(sp), velocity(vel) {};
 
 	~ProjectileComponent() {};
 
 	void Init() override
 	{
 		transform = &entity->GetComponent<TransformComponent>();
+		transform->velocity = velocity;
 	}
 
 	void Update() override
@@ -23,6 +22,7 @@ public:
 		distance += speed;
 
 		if (distance > range) {
+			SDL_Log("Out of Range!");
 			entity->Destroy();
 		}
 		else if (
@@ -41,4 +41,5 @@ private:
 	int range;
 	int speed;
 	int distance;
+	Vector2D velocity;
 };

@@ -64,7 +64,10 @@ void Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	player.AddComponent<ColliderComponent>("player");
 	player.AddGroup(GroupPlayer);
 
-	assetManager->CreateProjectile(Vector2D(600, 600), 200, 2, "projectile");
+	assetManager->CreateProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile");
+	assetManager->CreateProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile");
+	assetManager->CreateProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile");
+	assetManager->CreateProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile");
 }
 
 auto& tiles(manager.GetGroup(Game::GroupMap));
@@ -102,6 +105,7 @@ void Game::Update()
 
 	for (auto& projectile : projectiles) {
 		if (Collision::AABB(player.GetComponent<ColliderComponent>().collider, projectile->GetComponent<ColliderComponent>().collider)) {
+			SDL_Log("Hit Player!");
 			projectile->Destroy();
 		}
 	}
