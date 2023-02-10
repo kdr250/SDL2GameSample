@@ -169,6 +169,7 @@
     <ClInclude Include="src\ecs\TileComponent.h" />
     <ClInclude Include="src\ecs\TransformComponent.h" />
     <ClInclude Include="src\ecs\SpriteComponent.h" />
+    <ClInclude Include="src\ecs\UILabel.h" />
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Game.h" />
